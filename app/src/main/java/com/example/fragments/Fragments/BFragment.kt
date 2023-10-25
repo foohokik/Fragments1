@@ -12,7 +12,7 @@ import com.example.fragments.databinding.FragmentBBinding
 
 class BFragment: Fragment() {
 
-    var str: String? = null
+    var str: String = ""
     private var _binding: FragmentBBinding? = null
     private val binding get() = _binding!!
 
@@ -28,13 +28,13 @@ class BFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = Bundle()
-
 
         binding.btnBNext.setOnClickListener {view:View ->
             str = binding.edView.text.toString()
-            bundle.putString(STRING_ARG, str)
-            view.findNavController().navigate(R.id.BFragment2_to_CFragment, bundle)
+
+            val action = BFragmentDirections.BFragment2ToCFragment(str)
+
+            view.findNavController().navigate(action)
         }
 
         binding.btnBBack.setOnClickListener {view:View ->

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgs
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.fragments.R
 import com.example.fragments.databinding.FragmentABinding
 import com.example.fragments.databinding.FragmentCBinding
@@ -14,6 +16,9 @@ class CFragment: Fragment() {
 
     private var _binding: FragmentCBinding? = null
     private val binding get() = _binding!!
+
+    private val args: CFragmentArgs by navArgs()
+    private var text:String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +31,8 @@ class CFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tv.text = arguments?.getString(STRING_ARG)
+        text = args.stringarg
+        binding.tv.text = text
 
         binding.btnCBack.setOnClickListener {view:View ->
             view.findNavController().navigate(R.id.CFragment_to_BFragment2)
