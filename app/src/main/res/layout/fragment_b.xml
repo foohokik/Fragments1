@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.BFragment">
+
+
+    <TextView
+        android:id="@+id/nameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:text="@string/fragmentB"
+        />
+
+    <Button
+        android:id="@+id/btnBNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="10dp"
+        android:text="Next" />
+
+    <Button
+        android:id="@+id/btnBBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="10dp"
+        android:text="Back"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/edView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="text"
+        android:visibility="visible" />
+
+</FrameLayout>

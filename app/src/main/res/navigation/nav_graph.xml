@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/AFragment">
+    <fragment
+        android:id="@+id/AFragment"
+        android:name="com.example.fragments.Fragments.AFragment"
+        android:label="fragment_a"
+        tools:layout="@layout/fragment_a" >
+        <action
+            android:id="@+id/AFragment_to_BFragment"
+            app:destination="@id/BFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/BFragment2"
+        android:name="com.example.fragments.Fragments.BFragment"
+        android:label="fragment_b"
+        tools:layout="@layout/fragment_b" >
+        <action
+            android:id="@+id/BFragment2_to_CFragment"
+            app:destination="@id/CFragment"
+            app:popUpTo="@id/AFragment" />
+        <action
+            android:id="@+id/BFragment2_to_AFragment"
+            app:destination="@id/AFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/CFragment"
+        android:name="com.example.fragments.Fragments.CFragment"
+        android:label="fragment_c"
+        tools:layout="@layout/fragment_c" >
+        <action
+            android:id="@+id/CFragment_to_DFragment"
+            app:destination="@id/DFragment"
+            app:popUpTo="@id/BFragment2" />
+        <action
+            android:id="@+id/CFragment_to_BFragment2"
+            app:destination="@id/BFragment2" />
+        <argument android:name="STRING_ARG"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/DFragment"
+        android:name="com.example.fragments.Fragments.DFragment"
+        android:label="fragment_d"
+        tools:layout="@layout/fragment_d" >
+        <action
+            android:id="@+id/DFragment_to_AFragment"
+            app:destination="@id/AFragment"
+            app:popUpTo="@id/CFragment" />
+    </fragment>
+</navigation>

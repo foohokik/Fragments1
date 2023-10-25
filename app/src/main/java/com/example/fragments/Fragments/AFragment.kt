@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.fragments.R
 import com.example.fragments.databinding.ActivityMainBinding
 import com.example.fragments.databinding.FragmentABinding
@@ -27,12 +29,8 @@ class AFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btn1.setOnClickListener{
-  parentFragmentManager
-    .beginTransaction()
-    .addToBackStack(null)
-    .replace(R.id.container, BFragment.newInstance())
-    .commit()
+        binding.btnA.setOnClickListener {view:View ->
+            view.findNavController().navigate(R.id.AFragment_to_BFragment)
         }
     }
 
@@ -41,8 +39,4 @@ class AFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = AFragment()
-    }
 }
