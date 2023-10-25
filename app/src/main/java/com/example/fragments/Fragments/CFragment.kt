@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.fragments.R
 import com.example.fragments.databinding.FragmentABinding
+import com.example.fragments.databinding.FragmentCBinding
 
 class CFragment: Fragment() {
 
-    var str: String? = null
-    private var _binding: FragmentABinding? = null
+    private var _binding: FragmentCBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,36 +20,21 @@ class CFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentABinding.inflate(inflater, container, false)
+        _binding = FragmentCBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.tv.text = arguments?.getString(STRING_ARG)
 
-        binding.apply {
-
-            nameFragment.text =getString(R.string.fragmentC)
-            btn2.visibility = View.VISIBLE
-
-            btn2.setOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
-
-            tv.visibility = View.VISIBLE
-            tv.text = arguments?.getString(STRING_ARG)
-
-
-            btn1.setOnClickListener {
-                parentFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.container, DFragment.newInstance())
-                    .commit()
-            }
-
-
+        binding.btnCBack.setOnClickListener {view:View ->
+            view.findNavController().navigate(R.id.CFragment_to_BFragment2)
         }
+        binding.btnCNext.setOnClickListener {view:View ->
+            view.findNavController().navigate(R.id.CFragment_to_DFragment)
+        }
+
     }
 
     override fun onDestroyView() {
@@ -59,12 +45,6 @@ class CFragment: Fragment() {
     companion object {
         const val STRING_ARG = "STRING_ARG"
 
-        @JvmStatic
-        fun newInstance(str: String) = CFragment().apply {
-            arguments = Bundle().apply {
-                putString(STRING_ARG, str)
-            }
-        }
     }
 
 }

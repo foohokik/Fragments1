@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.fragments.R
 import com.example.fragments.databinding.FragmentABinding
+import com.example.fragments.databinding.FragmentBBinding
 
 class BFragment: Fragment() {
 
     var str: String? = null
-    private var _binding: FragmentABinding? = null
+    private var _binding: FragmentBBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,35 +21,24 @@ class BFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentABinding.inflate(inflater, container, false)
+        _binding = FragmentBBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-
-            nameFragment.text =getString(R.string.fragmentB)
-            btn2.visibility = View.VISIBLE
-
-            btn2.setOnClickListener {
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
-
-            ed.visibility = View.VISIBLE
-
-            btn1.setOnClickListener{
-               str = ed.text.toString()
-                parentFragmentManager
-                    .beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.container, CFragment.newInstance(str!!))
-                    .commit()
-            }
+        val bundle = Bundle()
 
 
+        binding.btnBNext.setOnClickListener {view:View ->
+            str = binding.edView.text.toString()
+            bundle.putString(STRING_ARG, str)
+            view.findNavController().navigate(R.id.BFragment2_to_CFragment, bundle)
+        }
 
+        binding.btnBBack.setOnClickListener {view:View ->
+            view.findNavController().navigate(R.id.BFragment2_to_AFragment)
         }
     }
 
@@ -57,7 +48,9 @@ class BFragment: Fragment() {
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance() = BFragment()
+        const val STRING_ARG = "STRING_ARG"
+
     }
+
+
 }
